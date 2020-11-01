@@ -17,11 +17,9 @@ Make sure to install the latest commit of OpenOCD, which includes the MSP432 boa
 
 On macOS:
 ```bash
-$ brew install autoconf
-$ brew install automake
-$ brew install texinfo
 $ brew install openocd --HEAD
 ```
+You may also need to install `openocd` dependencies: `autoconf`, `automake` and `texinfo`
 
 On other platforms, follow the instructions on https://sourceforge.net/p/openocd/code/ci/master/tree/ in the section *Compiling OpenOCD*
 
@@ -53,9 +51,7 @@ $ arm-none-eabi-gdb -q target/thumbv7em-none-eabihf/debug/arm-hello-world-rust
 $ (gdb) target remote :3333
 $ (gdb) load
 $ (gdb) monitor arm semihosting enable
-$ (gdb) break main
 $ (gdb) continue
-$ (gdb) next
 ```
 
 You should see `Hello, world!` displayed at the OpenOCD terminal
