@@ -32,26 +32,6 @@
             "group": "build"
         },
         {
-            "label": "cargo build --examples",
-            "type": "process",
-            "command": "cargo",
-            "args": ["build","--examples"],
-            "problemMatcher": [
-                "$rustc"
-            ],
-            "group": "build"
-        },
-        {
-            "label": "cargo build --examples --release",
-            "type": "process",
-            "command": "cargo",
-            "args": ["build","--examples", "--release"],
-            "problemMatcher": [
-                "$rustc"
-            ],
-            "group": "build"
-        },
-        {
             "label": "cargo clean",
             "type": "process",
             "command": "cargo",
