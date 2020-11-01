@@ -25,16 +25,15 @@ $ brew install openocd --HEAD
 
 On other platforms, follow the instructions on https://sourceforge.net/p/openocd/code/ci/master/tree/ in the section *Compiling OpenOCD*
 
+## Running
+
+Setup Rust beta and add the ARM build platform target:
 ```bash
 $ rustup default beta
 $ rustup target add thumbv7em-none-eabihf
-$ cargo build --example hello
 ```
 
-## Running
-
 Clone and compile the project:
-
 ```bash
 $ git clone git@github.com:caiotavares/arm-hello-world-rust.git
 $ cd arm-hello-world-rust
