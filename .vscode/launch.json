@@ -7,20 +7,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "cortex-debug",
-            "request": "launch",
-            "name": "Debug (QEMU)",
-            "servertype": "qemu",
-            "cwd": "${workspaceRoot}",
-            "preLaunchTask": "cargo build",
-            "runToMain": true,
-            "executable": "./target/thumbv7m-none-eabi/debug/arm-hello-world-rust",
-            /* Run `cargo build --example hello` and uncomment this line to run semi-hosting example */
-            //"executable": "./target/thumbv7m-none-eabi/debug/examples/hello",
-            "cpu": "cortex-m3",
-            "machine": "lm3s6965evb",
-        },
-        {
             /* Configuration for the MSP432P401R Launchpad board */
             "type": "cortex-debug",
             "request": "launch",
@@ -34,8 +20,7 @@
             // "executable": "./target/thumbv7em-none-eabihf/debug/examples/itm",
             "device": "MSP432P401R",
             "configFiles": [
-                "interface/stlink-v2-1.cfg",
-                "target/stm32f3x.cfg"
+                "board/ti_msp432_launchpad.cfg"
             ],
             "svdFile": "${workspaceRoot}/.vscode/MSP432P401R.svd",
             "swoConfig": {
@@ -44,7 +29,11 @@
                 "swoFrequency": 2000000,
                 "source": "probe",
                 "decoders": [
-                    { "type": "console", "label": "ITM", "port": 0 }
+                    {
+                        "type": "console",
+                        "label": "ITM",
+                        "port": 0
+                    }
                 ]
             }
         }
