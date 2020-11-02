@@ -1,4 +1,4 @@
-# `arm-hello-world-rust`
+# arm-hello-world-rust
 
 ARM Cortex M4F application built using the [rust-embedded template](https://github.com/rust-embedded/cortex-m-quickstart)
 
