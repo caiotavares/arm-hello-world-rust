@@ -10,8 +10,9 @@ use msp432p401r::{WDT_A, DIO, Peripherals};
 fn stop_watchdog_timer(peripherals: &Peripherals) {
     hprintln!("Stopping watchdog timer").unwrap();
     peripherals.WDT_A.wdtctl.modify(|r, w| unsafe {
-        let hold: u16 = (r.bits() | 0x0080) & 0x00FF;
-        w.bits(0x5A00 + hold)
+        let watchdog_password: u16 = 0x5A00;
+        let hold: u16 = (r.bits() | 0x0080) & 0x00FF; // Set bit 7 to one, everything else stays the same
+        w.bits(watchdog_password + hold)
     });
 }
 
