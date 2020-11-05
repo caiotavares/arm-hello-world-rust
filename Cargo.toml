@@ -12,6 +12,10 @@ cortex-m-semihosting = "0.3.3"
 panic-halt = "0.2.0"
 msp432p401r-pac = "0.1.0"
 
+[lib]
+name = "lib"
+path = "src/lib.rs"
+
 # this lets you use `cargo fix`!
 [[bin]]
 name = "arm-hello-world-rust"
