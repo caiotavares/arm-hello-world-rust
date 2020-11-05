@@ -1,3 +1,5 @@
+#![no_std]
+
 use msp432p401r::Peripherals;
 
 pub fn stop_watchdog_timer(peripherals: &Peripherals) {
