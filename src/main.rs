@@ -2,9 +2,8 @@
 #![no_std]
 
 use cortex_m_rt::entry;
-use msp432p401r as pac;
+use msp432p401r::Peripherals;
 use panic_halt as _;
-use msp432p401r::{WDT_A, DIO, Peripherals};
 
 fn stop_watchdog_timer(peripherals: &Peripherals) {
     peripherals.WDT_A.wdtctl.modify(|r, w| unsafe {
@@ -20,7 +19,7 @@ fn set_p1_0_output_dir(peripherals: &Peripherals) {
     });
 }
 
-fn toggle_p1_0(peripherals: &Peripherals) {
+fn toggle_p1_0_output(peripherals: &Peripherals) {
     peripherals.DIO.paout.modify(|r, w| unsafe {
         w.p1out().bits(r.p1out().bits() ^ 0x01)
     });
@@ -28,13 +27,13 @@ fn toggle_p1_0(peripherals: &Peripherals) {
 
 #[entry]
 fn main() -> ! {
-    let peripherals = pac::Peripherals::take().unwrap();
+    let peripherals = Peripherals::take().unwrap();
 
     stop_watchdog_timer(&peripherals);
     set_p1_0_output_dir(&peripherals);
 
     loop {
-        toggle_p1_0(&peripherals);
+        toggle_p1_0_output(&peripherals);
 
         let mut delay = 100000;
         while delay > 0 {
