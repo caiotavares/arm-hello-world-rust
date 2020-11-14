@@ -1,20 +1,24 @@
 #![no_main]
 #![no_std]
 
+extern crate msp432p401r_hal as hal;
+
 use cortex_m_rt::entry;
-use msp432p401r::Peripherals;
+use hal::gpio::{Output, ToggleableOutputPin};
+use hal::gpio;
+use hal::gpio::porta::P1_0;
+use hal::watchdog::{Disable, Enabled, WatchdogTimer};
 use panic_halt as _;
 
 #[entry]
 fn main() -> ! {
-    let peripherals = Peripherals::take().unwrap();
+    let watchdog: WatchdogTimer<Enabled> = WatchdogTimer::<Enabled>::new();
+    watchdog.try_disable().unwrap();
 
-    lib::stop_watchdog_timer(&peripherals);
-    lib::set_p1_0_output_dir(&peripherals);
+    let mut p1_0: P1_0<Output> = gpio::porta::P1_0::<Output>::into_output();
 
     loop {
-        lib::toggle_p1_0_output(&peripherals);
-
+        p1_0.try_toggle().unwrap();
         let mut delay = 100000;
         while delay > 0 {
             delay = delay - 1;
