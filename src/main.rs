@@ -4,7 +4,7 @@
 extern crate msp432p401r_hal as hal;
 
 use cortex_m_rt::entry;
-use hal::gpio::{Output, ToggleableOutputPin};
+use hal::gpio::{Output, ToggleableOutputPin, PrimaryModuleFunction, GPIO};
 use hal::gpio;
 use hal::gpio::porta::P1_0;
 use hal::watchdog::{Disable, Enabled, WatchdogTimer};
@@ -15,7 +15,7 @@ fn main() -> ! {
     let watchdog: WatchdogTimer<Enabled> = WatchdogTimer::<Enabled>::new();
     watchdog.try_disable().unwrap();
 
-    let mut p1_0: P1_0<Output> = gpio::porta::P1_0::<Output>::into_output();
+    let mut p1_0: P1_0<GPIO<Output>> = gpio::porta::P1_0::<GPIO<Output>>::into_output();
 
     loop {
         p1_0.try_toggle().unwrap();
